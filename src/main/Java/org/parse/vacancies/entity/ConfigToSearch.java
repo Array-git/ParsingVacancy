@@ -1,20 +1,16 @@
 package org.parse.vacancies.entity;
 
-
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ConfigToSearch {
     //@Size(min = 1, max=25, message = "name must be 1-25 symbols")
-    @NotEmpty(message = " Введите стратегию")
+    @NotEmpty(message = "Введите cлова для поиска")
     private String keyWords;
     private String city;
-    @NotEmpty(message = " Выберите стратегию")
+    @NotEmpty(message = "Выберите площадку")
     private String[] strategies;
     private Map<String, String> strategiesList;
 

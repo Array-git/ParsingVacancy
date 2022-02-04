@@ -1,13 +1,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-form#configToSearch {
-align-content: center;
-align-items: center;
-object-position: center;
-}
-
 div {
-
+display: flex;
 justify-content: center;
 }
 </style>
@@ -26,28 +21,34 @@ justify-content: center;
 </head>
 <body>
 <h2 align="center">Укажите какие вакансии вы хотите найти</h2>
-<div style="justify-content: center">
-    <form id="configToSearch" action="showVacancies" method="get">
-        <div style="display: flex">
+<div>
+    <form:form action="showVacancies" modelAttribute="configToSearch" method="get">
+        <div>
             <div style="width: 260px">Введите ключевые слова для поиска:</div>
-            <div style="width: 200px"><input id="keyWords" name="keyWords" type="text" value=""></div>
+            <div style="width: 200px"><form:input path="keyWords"/></div>
         </div>
-        <div style="display: flex">
+        <div>
+        <form:errors style="color: red;" id="error" path="keyWords"/>
+        </div>
+        <div>
             <div style="width: 260px">Введите город для поиска:</div>
-            <div style="width: 200px"><input id="city" name="city" type="text" value=""></div>
+            <div style="width: 200px"><form:input path="city"/></div>
         </div>
-        <div style="display: flex">
-            <div style="width: 460px; text-align: center">Выберите площадки для поиска вакансий:</div>
+        <div>
+            <div style="width: 460px">Выберите площадки для поиска вакансий:</div>
         </div>
-        <div style="display: flex">
+        <div>
             <div style="width: 460px; text-align: center">
-                <span><input id="strategies1" name="strategies" type="checkbox" value="career.habr.com"><label for="strategies1">Хабр Карьера</label></span><span><input id="strategies2" name="strategies" type="checkbox" value="hh.ru"><label for="strategies2">Head Hunter</label></span><input type="hidden" name="_strategies" value="on">
+                <form:checkboxes path="strategies" items="${configToSearch.strategiesList}"/>
             </div>
         </div>
-        <div style="display: flex">
-            <input style="width: 460px; text-align: center" type="submit" value="OK">
+        <div>
+            <form:errors style="color: red;" id="error" path="strategies"/>
         </div>
-    </form>
+        <div>
+        <input style="width: 460px" type="submit" value="OK">
+        </div>
+    </form:form>
 </div>
 </body>
 </html>

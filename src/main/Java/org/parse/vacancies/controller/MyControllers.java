@@ -27,7 +27,6 @@ public class MyControllers {
     public String showVacancies(@Valid @ModelAttribute("configToSearch") ConfigToSearch configToSearch, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){return "start-page";}
         Aggregator aggregator = new Aggregator();
-        aggregator.toProvider(configToSearch.getStrategies());
         List<Vacancy> vacancyList = aggregator.getVacancies(configToSearch.getKeyWords()
                 , configToSearch.getCity()
                 , aggregator.toProvider(configToSearch.getStrategies()));

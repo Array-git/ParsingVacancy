@@ -2,7 +2,6 @@ package org.parse.vacancies.model;
 
 
 import org.parse.vacancies.entity.Vacancy;
-import org.parse.vacancies.view.View;
 
 import java.util.ArrayList;
 import java.util.Comparator;
