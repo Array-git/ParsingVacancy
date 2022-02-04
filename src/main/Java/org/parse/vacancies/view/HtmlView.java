@@ -29,9 +29,6 @@ public class HtmlView implements View{
         this.controller = controller;
     }
 
-    public void userCitySelectEmulationMethod(){
-        controller.setKeyWordsAndParse("","Kaliningrad");
-    }
 
     private String getUpdatedFileContent(List<Vacancy> vacancies){
         try {

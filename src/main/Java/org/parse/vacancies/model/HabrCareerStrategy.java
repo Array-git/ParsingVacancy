@@ -13,37 +13,18 @@ import java.util.List;
 
 public class HabrCareerStrategy implements Strategy{
     private static final String userAgent = "Chrome/97.0.4692.99";
-    //private static final String referrer = "https://kaliningrad.hh.ru/";
-    private static final String URL_FORMAT = "https://career.habr.com/vacancies?page=%d&q=%s+%s&qid=3&remote=true";
+    private static final String URL_FORMAT = "https://career.habr.com/vacancies?page=%d&q=%s+%s+%s+%s";
 
     public HabrCareerStrategy() {
     }
 
     @Override
-    public List<Vacancy> getVacancies(String searchString, String cityName) {
+    public List<Vacancy> getVacancies(String searchString, String cityName, Lvl lvl, boolean remove) {
         List<Vacancy> vacancies = new ArrayList<>();
-        /*int page = 0; //для валидатора, страница устарела
-        do{
-            Document document = getDocument(searchString, page);
-            Elements elements = document.getElementsByClass("job");
-            if(elements.isEmpty()) break;
-            for (Element element: elements) {
-                Vacancy vacancy = new Vacancy();
-                vacancy.setCompanyName(element.getElementsByAttributeValue("class", "company_name").text());
-                vacancy.setTitle(element.getElementsByAttributeValue("class", "title").text());
-                vacancy.setCity(element.getElementsByAttributeValue("class", "location").text());
-                vacancy.setSalary(element.getElementsByAttributeValue("class", "salary").text());
-                vacancy.setUrl("https://career.habr.com"+element.getElementsByClass("title").get(0).getElementsByTag("a").attr("href"));
-                vacancy.setSiteName("career.habr.com");
-                vacancies.add(vacancy);
-            }
-            page++;
-        }
-        while (true);*/
         int page =1; //Начинается с 1 (страницы 0 и 1 одна и та же)
         ConvertDate convertDate = new ConvertDate();
         do{
-            Document document = getDocument(searchString, cityName, page);
+            Document document = getDocument(searchString, cityName, page, lvl, remove);
             Elements elements = document.getElementsByClass("vacancy-card");
             if(elements.isEmpty()) break;
             for (Element element: elements) {
@@ -66,12 +47,24 @@ public class HabrCareerStrategy implements Strategy{
         return vacancies;
     }
 
-    protected Document getDocument(String searchString, String city, int page){
+    protected Document getDocument(String searchString, String city, int page, Lvl lvl, boolean remote){
         try {
-            return Jsoup.connect(String.format(URL_FORMAT,page,searchString, city)).userAgent(userAgent).get();
+            String strRemote = remote?"&remote=true":"";
+            return Jsoup.connect(String.format(URL_FORMAT,page,searchString, city, getLVL(lvl), strRemote)).userAgent(userAgent).get();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private String getLVL(Lvl lvl){
+        switch (lvl){
+            case Trainee: return "&qid=1";
+            case Junior: return "&qid=3";
+            case Middle: return "&qid=4";
+            case Senior: return "&qid=5";
+            case Lead: return "&qid=6";
+            default: return "";
+        }
     }
 }

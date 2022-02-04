@@ -14,20 +14,19 @@ public class HHStrategy implements Strategy{
     private static final String userAgent = "Chrome/97.0.4692.99";
     private static final String referrer = "https://kaliningrad.hh.ru/";
     //    private static final int timeout = 5 * 1000;
-    private static final String URL_FORMAT = "https://hh.ru/search/vacancy?text=%s+%s&page=%d";
-    //private static final String URL_CACHE = "https://javarush.ru/testdata/big28data.html";
+    private static final String URL_FORMAT = "https://hh.ru/search/vacancy?%s&text=%s+%s+%s&page=%d";
 
 
     public HHStrategy() {
     }
 
     @Override
-    public List<Vacancy> getVacancies(String searchString, String cityName){
+    public List<Vacancy> getVacancies(String searchString, String cityName, Lvl lvl, boolean remove){
         List<Vacancy> vacancies = new ArrayList<>();
         int page = 0;
         ConvertDate convertDate = new ConvertDate();
         do {
-            Document cacheDoc = getDocument(searchString, cityName, page);
+            Document cacheDoc = getDocument(searchString, cityName, page, lvl, remove);
             Elements elements = cacheDoc.getElementsByClass("vacancy-serp-item"); //select("div[data-qa=vacancy-serp__vacancy vacancy-serp__vacancy_standard_plus]"); //"data-qa#vacancy-serp__vacancy-title");
             if(elements.isEmpty()) break;
             for (Element element: elements) {
@@ -47,17 +46,13 @@ public class HHStrategy implements Strategy{
             }
             page++;
         } while (true);
-        /*try {
-            Document document = Jsoup.connect(String.format(URL_FORMAT,"Kiev",0)).userAgent(userAgent).referrer(referrer).get();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
         return vacancies;
     }
 
-    protected Document getDocument(String searchString, String city, int page){
+    protected Document getDocument(String searchString, String city, int page, Lvl lvl, boolean remote){
         try {
-            return Jsoup.connect(String.format(URL_FORMAT,searchString, city,page)).userAgent(userAgent).referrer(referrer).get();
+            String strRemote = remote?"schedule=remote":"";
+            return Jsoup.connect(String.format(URL_FORMAT,strRemote, searchString, lvl.name(),city,page)).userAgent(userAgent).referrer(referrer).get();
         } catch (IOException e) {
             e.printStackTrace();
         }

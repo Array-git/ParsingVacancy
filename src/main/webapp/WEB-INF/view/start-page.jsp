@@ -35,6 +35,14 @@ justify-content: center;
             <div style="width: 200px"><form:input path="city"/></div>
         </div>
         <div>
+            <div style="width: 260px">Выберите квалификацию:</div>
+            <div style="width: 200px"><form:select path="lvl"><form:options items="${configToSearch.lvlList}"/></form:select></div>
+        </div>
+        <div>
+            <div style="width: 260px">Удаленная работа:</div>
+            <div style="width: 200px"><form:checkbox path="remote" value="true"/></div>
+        </div>
+        <div>
             <div style="width: 460px">Выберите площадки для поиска вакансий:</div>
         </div>
         <div>

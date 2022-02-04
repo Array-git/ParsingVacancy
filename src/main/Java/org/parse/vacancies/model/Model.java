@@ -18,17 +18,16 @@ public class Model {
         this.providers = providers;
     }
 
-    public List<Vacancy> getVacancies(String keyWords, String city){
+    public List<Vacancy> getVacancies(String keyWords, String city, Lvl lvl, boolean remove){
         List<Vacancy> vacancies = new ArrayList<>();
         for (Provider provider: providers) {
-            List<Vacancy> tmpVacancy = provider.getJavaVacancies(keyWords, city);
+            List<Vacancy> tmpVacancy = provider.getJavaVacancies(keyWords, city, lvl, remove);
             tmpVacancy.sort(new Comparator<Vacancy>() {
                 @Override
                 public int compare(Vacancy o1, Vacancy o2) {
                     return o2.getDates().compareTo(o1.getDates());
                 }
             });
-            //System.out.println(tmpVacancy.toString());
             vacancies.addAll(tmpVacancy);
         }
         return vacancies;

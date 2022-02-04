@@ -29,7 +29,9 @@ public class MyControllers {
         Aggregator aggregator = new Aggregator();
         List<Vacancy> vacancyList = aggregator.getVacancies(configToSearch.getKeyWords()
                 , configToSearch.getCity()
-                , aggregator.toProvider(configToSearch.getStrategies()));
+                , aggregator.toProvider(configToSearch.getStrategies())
+                , configToSearch.getLvl()
+                , configToSearch.isRemote());
         model.addAttribute("allVacancy",vacancyList);
         return "vacancies-page";
     }

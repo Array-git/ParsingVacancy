@@ -1,19 +1,16 @@
 package org.parse.vacancies;
 
 import org.parse.vacancies.entity.Vacancy;
-import org.parse.vacancies.model.HHStrategy;
-import org.parse.vacancies.model.HabrCareerStrategy;
-import org.parse.vacancies.model.Model;
-import org.parse.vacancies.model.Provider;
+import org.parse.vacancies.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Aggregator {
-    public List<Vacancy> getVacancies(String keyWords, String city, Provider[] stringProviders) {
+    public List<Vacancy> getVacancies(String keyWords, String city, Provider[] stringProviders, Lvl lvl, boolean remove) {
         Model model = new Model(stringProviders);
-        ParsController controller = new ParsController(model);
-        return controller.setKeyWordsAndParse(keyWords, city);
+        //ParsController controller = new ParsController(model);
+        return model.getVacancies(keyWords, city, lvl, remove);
     }
     
     public Provider[] toProvider(String[] strategies){
