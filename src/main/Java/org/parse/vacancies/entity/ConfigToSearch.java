@@ -1,7 +1,6 @@
 package org.parse.vacancies.entity;
 
 import org.parse.vacancies.model.Lvl;
-import org.parse.vacancies.model.LvlHH;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.Arrays;

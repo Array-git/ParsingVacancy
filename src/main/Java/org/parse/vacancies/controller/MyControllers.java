@@ -35,5 +35,4 @@ public class MyControllers {
         model.addAttribute("allVacancy",vacancyList);
         return "vacancies-page";
     }
-
 }
