@@ -11,7 +11,7 @@ public class Provider {
         this.strategy = strategy;
     }
 
-    public List<Vacancy> getJavaVacancies(String keyWords, String city, Lvl lvl, boolean remove){
+    public List<Vacancy> getJavaVacancies(String keyWords, String city, Lvl lvl, boolean remove) {
         return strategy.getVacancies(keyWords, city, lvl, remove);
     }
 

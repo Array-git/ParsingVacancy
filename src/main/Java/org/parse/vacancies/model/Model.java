@@ -11,16 +11,16 @@ import java.util.List;
 public class Model {
     private Provider[] providers;
 
-    public Model(Provider ...providers) {
+    public Model(Provider... providers) {
         /*if (view == null || providers == null || providers.length == 0) {
             throw new IllegalArgumentException();
         }*/
         this.providers = providers;
     }
 
-    public List<Vacancy> getVacancies(String keyWords, String city, Lvl lvl, boolean remove){
+    public List<Vacancy> getVacancies(String keyWords, String city, Lvl lvl, boolean remove) {
         List<Vacancy> vacancies = new ArrayList<>();
-        for (Provider provider: providers) {
+        for (Provider provider : providers) {
             List<Vacancy> tmpVacancy = provider.getJavaVacancies(keyWords, city, lvl, remove);
             tmpVacancy.sort(new Comparator<Vacancy>() {
                 @Override

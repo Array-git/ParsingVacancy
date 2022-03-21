@@ -12,27 +12,29 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.util.*;
+import java.util.List;
 
 @Controller
 //@RequestMapping("/")
 public class MyControllers {
     @RequestMapping("/")
-    public String startView(Model model){
+    public String startView(Model model) {
         model.addAttribute("configToSearch", new ConfigToSearch());
         return "start-page";
     }
 
     @GetMapping("showVacancies")
-    public String showVacancies(@Valid @ModelAttribute("configToSearch") ConfigToSearch configToSearch, BindingResult bindingResult, Model model){
-        if(bindingResult.hasErrors()){return "start-page";}
+    public String showVacancies(@Valid @ModelAttribute("configToSearch") ConfigToSearch configToSearch, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "start-page";
+        }
         Aggregator aggregator = new Aggregator();
         List<Vacancy> vacancyList = aggregator.getVacancies(configToSearch.getKeyWords()
                 , configToSearch.getCity()
                 , aggregator.toProvider(configToSearch.getStrategies())
                 , configToSearch.getLvl()
                 , configToSearch.isRemote());
-        model.addAttribute("allVacancy",vacancyList);
+        model.addAttribute("allVacancy", vacancyList);
         return "vacancies-page";
     }
 }

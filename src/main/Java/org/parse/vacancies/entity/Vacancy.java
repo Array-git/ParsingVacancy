@@ -88,7 +88,7 @@ public class Vacancy {
                 ", url='" + url + '\'' +
                 ", date='" + date + '\'' +
                 ", dates=" + dates +
-                '}'+"\n";
+                '}' + "\n";
     }
 
     @Override

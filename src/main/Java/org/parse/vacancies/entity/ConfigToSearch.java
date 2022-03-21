@@ -26,12 +26,12 @@ public class ConfigToSearch {
         strategiesList.put("hh.ru", "Head Hunter");
         strategiesList.put("career.habr.com", "Хабр Карьера");
         lvlList = new LinkedHashMap<>();
-        lvlList.put(Lvl.NONE,"");
-        lvlList.put(Lvl.Trainee,"Trainee");
-        lvlList.put(Lvl.Junior,"Junior");
-        lvlList.put(Lvl.Middle,"Middle");
-        lvlList.put(Lvl.Senior,"Senior");
-        lvlList.put(Lvl.Lead,"Lead");
+        lvlList.put(Lvl.NONE, "");
+        lvlList.put(Lvl.Trainee, "Trainee");
+        lvlList.put(Lvl.Junior, "Junior");
+        lvlList.put(Lvl.Middle, "Middle");
+        lvlList.put(Lvl.Senior, "Senior");
+        lvlList.put(Lvl.Lead, "Lead");
     }
 
     public String getKeyWords() {
@@ -110,7 +110,7 @@ public class ConfigToSearch {
     public String toString() {
         return "ConfigToSearch{" +
                 "keyWords='" + keyWords + '\'' +
-                "city='" + city +'\''+
+                "city='" + city + '\'' +
                 ", strategies=" + Arrays.toString(strategies) +
                 ", strategiesList=" + strategiesList +
                 '}';
